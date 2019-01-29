@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cochat</title>
+    <link rel="stylesheet" type="text/css" href="/assets/cochat.css">
+    <script type="text/javascript" src="/assets/cochat.js"></script>
+    <script type="text/javascript" src="/assets/cochat_dom.js"></script>
+    <script type="text/javascript">
+        async function createChatterAndRedirectIfNecessary() {
+            const name = document.getElementById('name').value;
+            if (name === '') return false;
+            const chatter = await createChatter(name);
+            decorateAndRedirectIfNecessary(chatter);
+        }
+
+        function decorateAndRedirectIfNecessary(chatter) {
+            document.getElementById('userTitle').innerHTML = `Welcome, ${chatter.name}`;
+            document.getElementById('chatterForm').hidden = true;
+            const targetStr = new URLSearchParams(window.location.search).get('origin');
+            if (targetStr && targetStr !== '') {
+                const target = decodeURIComponent(targetStr);
+                setTimeout(() => window.location.href = target, 500);
+            }
+        }
+
+        ensureSession(decorateAndRedirectIfNecessary, () => {
+            document.getElementById('userTitle').innerHTML = 'Please register a chatter';
+            document.getElementById('chatterForm').hidden = false;
+        }).catch(e => {
+            console.error('failed to retrieve chatter session', e);
+            alert('failed to retrieve chatter session');
+        });
+    </script>
+</head>
+<body>
+<div class="page">
+    <div class="center">
+        <h1 class="title" id="userTitle"></h1>
+        <div class="registerForm" id="chatterForm" hidden>
+            <table class="centerContainer"><tbody>
+            <tr><td><label for="name">Name</label></td><td><input type="text" name="name" id="name" /></td></tr>
+            </tbody></table>
+            <input class="chatButton" type="button" value="Create Chatter" onclick="return createChatterAndRedirectIfNecessary();" />
+        </div>
+    </div>
+</div>
+</body>
+</html>

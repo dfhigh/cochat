@@ -1,0 +1,40 @@
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="/assets/cochat.css">
+<script type="text/javascript" src="/assets/cochat.js"></script>
+<script type="text/javascript" src="/assets/cochat_dom.js"></script>
+<title>cochat</title>
+<script type="text/javascript">
+    function createRoomAndRedirect() {
+        const name = document.getElementById('name').value;
+        if (name === '') return false;
+        if (name.length > 16) {
+            alert('name too long');
+            return false;
+        }
+        createRoom(name).then(room => window.location.href = "/" + room.token);
+    }
+
+    ensureSession(chatter => document.getElementById('userTitle').innerText = `Welcome, ${chatter.name}`,
+        () => window.location.href = `/session?origin=${encodeURIComponent(window.location.href)}`
+    ).catch(e => {
+        console.error('failed to ensure chatter session', e);
+        alert('failed to ensure chatter session');
+    });
+</script>
+</head>
+<body>
+<div class="page">
+    <div class="center" >
+        <h1 class="title" id="userTitle"></h1>
+        <div class="registerForm">
+            <table class="centerContainer"><tbody>
+            <tr><td><label for="name">Name</label></td><td><input type="text" name="name" id="name" /></td></tr>
+            </tbody></table>
+            <input class="chatButton" type="button" value="Create Room" onclick="return createRoomAndRedirect();" />
+        </div>
+    </div>
+</div>
+</body>
+</html>

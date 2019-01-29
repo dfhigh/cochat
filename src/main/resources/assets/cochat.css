@@ -1,0 +1,184 @@
+html,body {width:100%;height:100%;}
+/* html,body,ul,ol,dl,li,dt,dd,p,blockquote,fieldset,legend,img,form,h1,h2,h3,h4,h5,h6 {margin:0;padding:0;} */
+body {
+    font:normal 12px/1.5 Arial,Helvetica,'Bitstream Vera Sans',sans-serif;
+    background: #c5deea; /* Old browsers */
+    background: -moz-linear-gradient(top, #c5deea 0%, #066dab 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c5deea), color-stop(100%, #066dab)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #c5deea 0%, #066dab 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #c5deea 0%, #066dab 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #c5deea 0%, #066dab 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #c5deea 0%, #066dab 100%); /* W3C */
+    height: 90%;
+}
+
+td {
+    font-weight: bold;
+}
+
+textarea {
+    resize: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.title {
+    text-align: center;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    background: white;
+}
+
+.registerForm {
+    margin: auto;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.chatForm {
+    margin: auto;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 20%;
+}
+
+.chatInput {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: none;
+    width: 100%;
+    height: 75%;
+}
+
+.chatButton {
+    background-color: white;
+    border: 2px solid gray;
+    color: gray;
+    padding: auto;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: auto;
+    cursor: pointer;
+    width: auto;
+}
+
+.chatButton:focus, .chatButton:hover {
+    background-color: darkgray;
+    cursor: pointer;
+}
+
+.uploadButton {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.uploadButton + label {
+    background-color: white;
+    border: 2px solid gray;
+    color: gray;
+    padding: auto;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: auto;
+    width: auto;
+}
+
+.uploadButton:focus + label,
+.uploadButton + label:hover {
+    background-color: darkgray;
+    cursor: pointer;
+}
+
+.centerContainer {
+    text-align: center;
+    margin: auto;
+}
+
+.chatContainer {
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 80%;
+    width: 100%;
+    border-top: 2px solid darkcyan;
+    border-bottom: 2px solid darkcyan;
+}
+
+.header {
+    margin: auto;
+}
+
+.hint {
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #99a2aa;
+    font-style: italic;
+    font-size: 12px;
+    font-family: Arial, monospace;
+}
+
+.chatter {
+    padding-left: 5px;
+    color: #066dab;
+    font-style: italic;
+    font-size: 12px;
+    font-family: Arial monospace;
+}
+
+.content {
+    width: auto;
+    overflow-wrap: normal;
+    word-break: break-all;
+    padding: auto;
+    margin: auto auto auto 5px;
+    font-style: normal;
+    font-size: 15px;
+    font-family: Arial monospace;
+}
+
+.notification {
+    text-align: center;
+}
+
+.notification .hint {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+}

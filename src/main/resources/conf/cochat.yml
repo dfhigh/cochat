@@ -1,0 +1,11 @@
+file_store_path: tmp
+assets_dir_path: assets
+web_socket_enabled: true
+web_socket_port: 54099
+web_socket_addr: 0.0.0.0
+
+persist_enabled: true
+persist_dir: data
+compress_enabled: false
+max_edits_per_persist: 100
+persist_interval_seconds: 100

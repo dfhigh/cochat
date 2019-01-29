@@ -1,0 +1,34 @@
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="/assets/cochat.css">
+<script type="text/javascript" src="/assets/cochat.js"></script>
+<script type="text/javascript" src="/assets/cochat_dom.js"></script>
+<script type="text/javascript" src="/assets/cochat_ws.js"></script>
+<title>cochat</title>
+<script type="text/javascript">
+    ensureSession(chatter => initRoom('msg', 'chat', 'chatContainer', 'roomName'),
+        () => window.location.href = `/session?origin=${encodeURIComponent(window.location.href)}`
+    ).catch(e => {
+        console.error('failed to ensure chatter session', e);
+        alert('failed to ensure chatter session');
+    });
+</script>
+</head>
+<body>
+<div class="page">
+    <div class="center" >
+        <h1 id="roomName" class="title"></h1>
+        <div id="chatContainer" class="chatContainer"><div id="chat"></div></div>
+        <div class="chatForm">
+            <div><textarea name="message" id="msg" class="chatInput" placeholder="Type a message..."></textarea></div>
+            <div class="centerContainer">
+                <button class="chatButton" type="button" onclick="return sendTextMessage('msg');">Send</button>
+                <input class="uploadButton" id="upload" type="file" onchange="return upload('upload');">
+                <label for="upload">+</label>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
