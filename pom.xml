@@ -12,7 +12,7 @@
     <properties>
         <light4j.version>1.5.28</light4j.version>
         <log4j.version>2.11.1</log4j.version>
-        <mib.version>1.0-SNAPSHOT</mib.version>
+        <mib.version>1.2-SNAPSHOT</mib.version>
     </properties>
 
     <dependencyManagement>

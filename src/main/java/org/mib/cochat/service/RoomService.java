@@ -22,7 +22,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
 
-import static org.mib.common.ser.Serdes.serializeAsJsonString;
+import static org.mib.common.ser.Serdes.toJsonText;
 import static org.mib.common.validator.Validator.validateObjectNotNull;
 import static org.mib.common.validator.Validator.validateStringNotBlank;
 
@@ -188,7 +188,7 @@ public class RoomService {
         if (webSocketChannelsMap != null) {
             Set<WebSocketChannel> channels = webSocketChannelsMap.computeIfAbsent(room.getToken(), t -> Sets.newConcurrentHashSet());
             if (channels.isEmpty()) return;
-            String content = serializeAsJsonString(info);
+            String content = toJsonText(info);
             channels.forEach(channel -> WebSockets.sendText(content, channel, webSocketCallback));
         }
     }

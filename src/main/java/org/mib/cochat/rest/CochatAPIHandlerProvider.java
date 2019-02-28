@@ -45,8 +45,8 @@ import java.util.stream.Collectors;
 
 import static org.mib.cochat.rest.ContextInjectionHandler.blocking;
 import static org.mib.cochat.rest.ContextInjectionHandler.chainedBlocking;
-import static org.mib.common.ser.Serdes.deserializeFromJson;
-import static org.mib.common.ser.Serdes.serializeAsJsonString;
+import static org.mib.common.ser.Serdes.fromJson;
+import static org.mib.common.ser.Serdes.toJsonText;
 import static org.mib.common.validator.Validator.validateObjectNotNull;
 import static org.mib.common.validator.Validator.validateStringNotBlank;
 
@@ -111,7 +111,7 @@ public class CochatAPIHandlerProvider implements HandlerProvider {
     }
 
     private HttpHandler describeHandler() {
-        final String response = serializeAsJsonString(ConfigProvider.getBoolean("web_socket_enabled") ?
+        final String response = toJsonText(ConfigProvider.getBoolean("web_socket_enabled") ?
                 new Description(true, ConfigProvider.getInt("web_socket_port")) : new Description()
         );
         return exchange -> {
@@ -142,7 +142,7 @@ public class CochatAPIHandlerProvider implements HandlerProvider {
                 chatter = chatterService.getChatter(chatterToken.getValue());
             }
             if (chatter == null) {
-                String name = deserializeFromJson(IOUtils.toByteArray(exchange.getInputStream()), CreationRequest.class).name;
+                String name = fromJson(IOUtils.toByteArray(exchange.getInputStream()), CreationRequest.class).name;
                 chatter = chatterService.createChatter(name);
                 exchange.getResponseHeaders().add(Headers.SET_COOKIE, String.format(TOKEN_COOKIE_FORMAT, chatter.getToken()));
             }
@@ -152,7 +152,7 @@ public class CochatAPIHandlerProvider implements HandlerProvider {
 
     private HttpHandler roomCreateHandler() {
         return chainedBlocking(chatterService, exchange -> {
-            String name = deserializeFromJson(IOUtils.toByteArray(exchange.getInputStream()), CreationRequest.class).name;
+            String name = fromJson(IOUtils.toByteArray(exchange.getInputStream()), CreationRequest.class).name;
             Room room = roomService.createRoom(name);
             sendJson(exchange, room);
         });
@@ -258,7 +258,7 @@ public class CochatAPIHandlerProvider implements HandlerProvider {
         HeaderMap headers = exchange.getResponseHeaders();
         headers.add(CORS_HEADER, ALL);
         headers.add(Headers.CONTENT_TYPE, JSON_CONTENT_TYPE);
-        exchange.getResponseSender().send(serializeAsJsonString(object), StandardCharsets.UTF_8);
+        exchange.getResponseSender().send(toJsonText(object), StandardCharsets.UTF_8);
     }
 
     private void sendFile(HttpServerExchange exchange, String path) throws IOException {
